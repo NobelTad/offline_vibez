@@ -1,5 +1,118 @@
-.frame{
-    width: 100%;
-    height: 4000px;
+body {
+  background-color: #111827; /* Deep dark blue-gray */
+  color: #f3f4f6; /* Light text */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
+.p-4 {
+  padding: 1rem;
+}
+
+.space-y-8 > * + * {
+  margin-top: 2rem;
+}
+
+.max-w-xl {
+  max-width: 700px;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-lg {
+  font-size: 1.125rem;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+/* Wrapper for each card */
+.fram {
+  width: 100%;
+  height: 315px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #000;
+  border: 1px solid #374151; /* closed thin border */
+}
+
+/* Layout: video + arrow */
+.aspect-w-16.aspect-h-9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Arrow box styling */
+.arrow-box {
+  width: 100%;
+  height: 315px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+  box-shadow: 0 0 10px #16a34a77;
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.arrow-box:hover {
+  box-shadow: 0 0 20px 8px rgba(34, 255, 170, 0.35); /* aquarium glow */
+  transform: scale(1.03);
+}
+
+.arrow-icon {
+  font-size: 3rem;
+  color: white;
+  filter: drop-shadow(0 0 5px #22c55e);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.video-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+/* Thin arrow box */
+.arrow-container {
+  width: 60px;
+  height: 315px;
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(135deg, #16a34a, #4ade80);
+  box-shadow: 0 0 10px #16a34a66;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -4px; /* fix tiny space between iframe and arrow */
+  z-index: 1;
+}
+
+.arrow-container:hover {
+  box-shadow: 0 0 20px 6px rgba(34, 255, 170, 0.3);
+  transform: scale(1.02);
+}
+
+.green-arrow {
+  font-size: 2rem;
+  color: white;
+  text-shadow: 0 0 6px #22c55e;
 }

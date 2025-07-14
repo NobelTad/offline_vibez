@@ -42,16 +42,20 @@ export default function Viewing() {
       {videos.map(video => (
         <div key={video.id} className="max-w-xl mx-auto">
           <h3 className="text-lg font-semibold mb-2">{video.name}</h3>
-          <div className="aspect-w-16 aspect-h-9">
-            <iframe
-              src={toEmbedUrl(video.url)}
-              title={video.name}
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="fram"
-            />
-          </div>
+<div className="aspect-w-16 aspect-h-9 video-wrapper">
+  <iframe
+    src={toEmbedUrl(video.url)}
+    title={video.name}
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+    className="fram"
+  />
+  <div className="arrow-container">
+    <span className="green-arrow">→</span>
+  </div>
+</div>
+
         </div>
       ))}
     </div>
