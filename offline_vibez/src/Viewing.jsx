@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './viewing.css'
 // Sample data (could be fetched or imported instead)
 const videos = [
   {
@@ -49,7 +49,7 @@ export default function Viewing() {
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-              className="w-full h-full rounded-lg shadow"
+              className="fram"
             />
           </div>
         </div>

@@ -1,33 +1,28 @@
 import requests
-import base64
+import re
 
-CLIENT_ID = 'f4a338329b344b65b6c39f63392bc33f'
-CLIENT_SECRET = 'dd4095583c7744528d99e7f9f2ea7556'
+def download_youtube_poster(video_url, filename="poster.jpg"):
+    # Extract video ID from URL
+    match = re.search(r"(?:v=|\/)([0-9A-Za-z_-]{11})", video_url)
+    if not match:
+        print("[-] Invalid YouTube URL")
+        return
 
-def get_token():
-    creds = f"{CLIENT_ID}:{CLIENT_SECRET}"
-    token = base64.b64encode(creds.encode()).decode()
-    resp = requests.post(
-        'https://accounts.spotify.com/api/token',
-        headers={'Authorization': f'Basic {token}'},
-        data={'grant_type': 'client_credentials'}
-    )
-    return resp.json()['access_token']
+    video_id = match.group(1)
+    print(f"[+] Found video ID: {video_id}")
 
-def search_song(query):
-    token = get_token()
-    resp = requests.get(
-        'https://api.spotify.com/v1/search',
-        headers={'Authorization': f'Bearer {token}'},
-        params={'q': query, 'type': 'track', 'limit': 1}
-    )
-    data = resp.json()
-    item = data['tracks']['items'][0]
-    artist = item['artists'][0]['name']
-    track = item['name']
-    return artist, track
+    # Try to get high resolution thumbnail
+    thumbnail_url = f"https://img.youtube.com/vi/{video_id}/maxresdefault.jpg"
+    fallback_url = f"https://img.youtube.com/vi/{video_id}/hqdefault.jpg"
 
-if __name__ == '__main__':
-    q = input("Enter song to search: ")
-    artist, track = search_song(q)
-    print(f"🎵 Artist: {artist}\n🎶 Track: {track}")
+    response = requests.get(thumbnail_url)
+    if response.status_code != 200:
+        print("[!] High-res not found, using fallback.")
+        response = requests.get(fallback_url)
+
+    with open(filename, "wb") as f:
+        f.write(response.content)
+    print(f"[✅] Poster downloaded as '{filename}'")
+
+# 🔁 Example usage:
+download_youtube_poster("https://www.youtube.com/watch?v=1XzY2ij_vL4")
