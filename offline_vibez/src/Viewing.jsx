@@ -1,63 +1,52 @@
-import React from 'react';
-import './viewing.css'
+import React from "react";
+import "./viewing.css";
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 // Sample data (could be fetched or imported instead)
-const videos = [
-  {
-    id: 1,
-    name: "Lil Tecca - Ransom (Official Music Video)",
-    url: "https://www.youtube.com/watch?v=1XzY2ij_vL4"
-  },
-  {
-    id: 2,
-    name: "Lil Tecca - Ransom (Lyrics)",
-    url: "https://www.youtube.com/watch?v=0Cshm-BsiaU"
-  },
-  {
-    id: 3,
-    name: "Lil Tecca - Ransom (Lyrics)",
-    url: "https://www.youtube.com/watch?v=Sz-zo83cogY"
-  },
-  {
-    id: 4,
-    name: "Lil Tecca, Juice WRLD - Ransom (Clean - Lyrics)",
-    url: "https://www.youtube.com/watch?v=jvcQwGvh9HQ"
-  },
-  {
-    id: 5,
-    name: "Lil Tecca - Ransom (Clean - Lyrics)",
-    url: "https://www.youtube.com/watch?v=O0hiTfGicKQ"
-  }
-];
+
 
 // Utility to convert a YouTube URL into an embeddable URL
-const toEmbedUrl = (url) => {
+
+
+function Viewing() {
+  const toEmbedUrl = (url) => {
   const videoIdMatch = url.match(/[?&]v=([^&]+)/);
-  const id = videoIdMatch ? videoIdMatch[1] : '';
+  const id = videoIdMatch ? videoIdMatch[1] : "";
   return `https://www.youtube.com/embed/${id}`;
 };
+  const [videos, setVideos] = useState([]);
 
-export default function Viewing() {
+useEffect(() => {
+  axios
+    .get("http://127.0.0.1:5000/api")
+    .then((response) => {
+      setVideos(response.data); // assuming it's a JSON array
+    })
+    .catch((error) => {
+      console.error("Error fetching videos:", error);
+    });
+}, []);
   return (
     <div className="p-4 space-y-8">
-      {videos.map(video => (
+      {videos.map((video) => (
         <div key={video.id} className="max-w-xl mx-auto">
           <h3 className="text-lg font-semibold mb-2">{video.name}</h3>
-<div className="aspect-w-16 aspect-h-9 video-wrapper">
-  <iframe
-    src={toEmbedUrl(video.url)}
-    title={video.name}
-    frameBorder="0"
-    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-    className="fram"
-  />
-  <div className="arrow-container" onClick={() => alert(video.url)}>
-    <span className="green-arrow" >→</span>
-  </div>
-</div>
-
+          <div className="aspect-w-16 aspect-h-9 video-wrapper">
+            <iframe
+              src={toEmbedUrl(video.url)}
+              title={video.name}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="fram"
+            />
+            <div className="arrow-container" onClick={() => alert(video.url)}>
+              <span className="green-arrow">→</span>
+            </div>
+          </div>
         </div>
       ))}
     </div>
   );
 }
+export default Viewing;
