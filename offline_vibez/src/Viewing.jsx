@@ -51,8 +51,8 @@ export default function Viewing() {
     allowFullScreen
     className="fram"
   />
-  <div className="arrow-container">
-    <span className="green-arrow">→</span>
+  <div className="arrow-container" onClick={() => alert(video.url)}>
+    <span className="green-arrow" >→</span>
   </div>
 </div>
 
