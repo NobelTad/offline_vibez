@@ -28,6 +28,28 @@ useEffect(() => {
 }, []);
   return (
     <div className="p-4 space-y-8">
+<div className="search-wrapper">
+  <label htmlFor="video-search" className="sr-only">Search videos</label>
+  <input
+    id="video-search"
+    type="text"
+    placeholder="Search videos…"
+    className="search-input"
+    aria-label="Search videos"
+  />
+  <div className="asdad">
+
+
+  <button
+    className="search-icon"
+    aria-hidden="true"
+    onClick={() => alert('Icon clicked!')}
+  >
+    <i className="fas fa-search"></i>
+  </button>
+  </div>
+</div>
+
       {videos.map((video) => (
         <div key={video.id} className="max-w-xl mx-auto">
           <h3 className="text-lg font-semibold mb-2">{video.name}</h3>
