@@ -6,7 +6,12 @@ API_KEY = "AIzaSyBRfqVb1ezjDGQNYFFgqpjM-X6lz4mbf7I"
 YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 #for youtube search
-
+# disable caching
+class NoCache(Cache):
+    def get(self, url):
+        return None
+    def set(self, url, content):
+        pass
 
 
 
@@ -27,6 +32,7 @@ def youtube_search(query, max_results=5):
         YOUTUBE_API_SERVICE_NAME,
         YOUTUBE_API_VERSION,
         developerKey=API_KEY
+        cache=NoCache()
     )
     search_response = youtube.search().list(
         q=query,
